@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,6 +11,9 @@ from django.conf import settings
 def list_users(request):
     users = User.objects.all()
     return Response(UserSerializer(users, many=True).data)
+
+def home(request):
+    return render(request, "index.html")
 
 @api_view(['POST'])
 def create_user(request):
