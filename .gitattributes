@@ -1,2 +1,26 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Python / Django
+__pycache__/
+*.py[cod]
+*.sqlite3
+db.sqlite3
+
+# Entornos
+venv/
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Node (si usás algo en frontend)
+node_modules/
+dist/
+build/
+.venv/
+__pycache__/
+*.sqlite3
+.env
