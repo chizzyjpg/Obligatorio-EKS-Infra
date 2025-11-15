@@ -1,17 +1,26 @@
-version: "3.9"
-
 services:
+  # contenedor "dueño" del volumen de la BD (no expone puertos)
+  db:
+    image: alpine:3.20
+    container_name: sqlite-data
+    command: ["sh", "-c", "mkdir -p /data && ls -la /data && tail -f /dev/null"]
+    volumes:
+      - sqlite-data:/data
+
   users-api:
     build:
       context: ./backend
     container_name: users-api
-    ports:
-      - "8000:8000"
     environment:
       - DJANGO_ALLOWED_HOSTS=*
       - NOTIFIER_URL=http://notifier:5000/notify
+      - SQLITE_PATH=/app/db/db.sqlite3
+    volumes:
+      - sqlite-data:/app/db        # <-- acá montás el directorio de la BD
     depends_on:
-      - notifier
+      - db
+    ports:
+      - "8000:8000"
 
   notifier:
     build:
@@ -28,4 +37,7 @@ services:
       - "80:80"
     depends_on:
       - users-api
+
+volumes:
+  sqlite-data:
 
