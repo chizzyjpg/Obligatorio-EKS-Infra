@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: users-api
-          image: 580248541584.dkr.ecr.us-east-1.amazonaws.com/users-api:v6
+          image: 580248541584.dkr.ecr.us-east-1.amazonaws.com/users-api:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
         - name: notifier
-          image: 580248541584.dkr.ecr.us-east-1.amazonaws.com/users-api:ultimo
+          image: 580248541584.dkr.ecr.us-east-1.amazonaws.com/notifier:latest
           ports:
             - containerPort: 5000
 ---
